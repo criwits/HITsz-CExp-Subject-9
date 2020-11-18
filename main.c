@@ -131,13 +131,14 @@ void InputRecord(DATABASE *data_list, int *stu_number, int *sub_number, int *is_
         for (j = 0; j < *sub_number; j++)
         {
             printf("[ HINT]Please enter the score %d of the student %d: ", j + 1, i);
+            data_list[i].fScore[j] = 0.0;
             do
             {
                 fflush(stdin);
-                if (!iIsScanf)
+                if (!iIsScanf || data_list[i].fScore[j] < 0)
                     printf("[ERROR]Not a proper input, please try again: ");
                 iIsScanf = scanf("%f", &data_list[i].fScore[j]);
-            } while (!iIsScanf);
+            } while (!iIsScanf || data_list[i].fScore[j] < 0);
         }
     }
     printf("[ INFO]Successfully recorded data of %d students!\n\n", *stu_number);
